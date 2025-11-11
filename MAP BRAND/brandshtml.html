@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Web MAP - Revisi Akhir</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* Variabel CSS yang Direvisi */
+        :root {
+            --map-red: #d32f2f; /* Merah untuk elemen utama */
+            --premium-blue: #007bff; /* Warna biru untuk "Premium" */
+            --text-dark: #333333; /* Teks utama dan "Kelas Dunia" */
+            --text-light: #666666; 
+            --nav-bg: #ffffff; 
+            --footer-bg-light: #f7f7f7; 
+            --footer-bg-dark: #222222; 
+            --gray-brands: #e0e0e0; /* Warna abu-abu besar BRANDS */
+        }
+
+        /* Gaya Dasar */
+        body {
+            font-family: 'Poppins', sans-serif; 
+            color: var(--text-dark);
+        }
+
+        /* 1. NAVIGASI ATAS MERAH */
+        .navbar-top {
+            background-color: var(--map-red);
+            padding: 0;
+            min-height: 35px;
+        }
+        .navbar-top a {
+            color: #ffffff !important;
+            font-size: 0.75rem; 
+            padding: 0.5rem 0.5rem;
+        }
+
+        /* 2. NAVIGASI UTAMA */
+        .navbar-main {
+            background-color: var(--nav-bg);
+            border-bottom: 1px solid #eeeeee;
+        }
+        .navbar-main .navbar-brand {
+            padding: 1.2rem 0;
+        }
+        .navbar-main .nav-link {
+            color: var(--text-dark);
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            padding: 1.2rem 1rem; 
+            margin: 0 5px;
+        }
+        .navbar-main .nav-link:hover {
+            color: var(--map-red);
+        }
+
+        /* 3. BAGIAN UTAMA (HEADER) */
+        .header-main {
+            padding: 80px 0 100px 0; 
+            text-align: center;
+            background-color: var(--nav-bg); 
+            position: relative; 
+            overflow: hidden;
+        }
+        .header-main .brand-label {
+            font-size: 0.9rem;
+            color: var(--map-red);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+        }
+        .header-main h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.2;
+            z-index: 10;
+            position: relative;
+        }
+        
+        /* WARNA TEKS SESUAI PERMINTAAN BARU */
+        .header-main .premium-text {
+            font-weight: 700;
+            color: var(--premium-blue); /* Premium: Biru */
+        }
+        .header-main .kelas-dunia-text {
+            font-weight: 700;
+            color: var(--text-dark); /* Kelas Dunia: Hitam */
+        }
+        
+        /* Teks "BRANDS" besar di belakang */
+        .header-main::before {
+            content: "BRANDS";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 200px; 
+            font-weight: 900; 
+            color: var(--gray-brands); 
+            opacity: 0.7; 
+            letter-spacing: 0.1em;
+            z-index: 1; 
+        }
+
+        /* Tiga Persegi Kecil (Ukuran Ditingkatkan) */
+        .red-squares-separator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0 60px 0;
+            z-index: 10;
+            position: relative;
+        }
+        .red-squares-separator .square {
+            width: 8px; /* Diperbesar dari 5px */
+            height: 8px; /* Diperbesar dari 5px */
+            background-color: var(--map-red);
+            margin: 0 3px; /* Jarak antar kotak ditingkatkan */
+        }
+        
+        /* Kategori Brand */
+        .header-main .brand-categories {
+            z-index: 10;
+            position: relative;
+        }
+        .header-main .brand-categories a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0 15px;
+        }
+
+        /* 4. FOOTER ATAS (LINK) */
+        .footer-links {
+            padding: 60px 0;
+            background-color: var(--footer-bg-light);
+            border-top: 1px solid #eeeeee;
+        }
+        .footer-links h5 {
+            color: var(--text-dark);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-left: 15px; 
+            position: relative;
+        }
+        .footer-links h5::before {
+            content: "";
+            position: absolute;
+            left: 0; 
+            top: 50%;
+            transform: translateY(-50%);
+            width: 7px;
+            height: 7px;
+            background-color: var(--map-red);
+            border-radius: 50%;
+        }
+        .footer-links ul li a {
+            color: var(--text-light);
+            font-size: 0.85rem; 
+            line-height: 2;
+        }
+        
+        /* CTA dan Hak Cipta */
+        .footer-bottom {
+            padding: 30px 0 10px 0;
+            background-color: #ffffff;
+        }
+        .footer-bottom .mapclub-cta {
+            background-color: var(--map-red); 
+            color: #ffffff;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* COPYRIGHT BAR PALING BAWAH */
+        .copyright-bar {
+            background-color: var(--footer-bg-dark); 
+            color: #cccccc;
+            font-size: 0.7rem; 
+            padding: 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-top d-none d-md-flex">
+    <div class="container justify-content-end">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">IDX MAPI: RP 1,180.00 -2%</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> ID</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-search"></i> Q</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-main">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="map-logo.png" alt="MAP Logo Mitra Adiperkasa" style="height: 35px;"> 
+        </a>
+        
+        <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">PERUSAHAAN</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">BRAND</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">INVESTOR</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">BERITA</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">HUBUNGI KAMI</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">KARIR</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">GERAI</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">TAUTAN</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container header-main">
+    <p class="brand-label">BRAND</p>
+    <h1 class="my-3">
+        Terlibat dengan Brand <br>
+        <span class="premium-text">Premium</span> 
+        <span class="kelas-dunia-text">Kelas Dunia</span>
+    </h1>
+    
+    <div class="red-squares-separator">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+
+    <div class="d-flex justify-content-center flex-wrap brand-categories">
+        <a href="#">ACTIVE</a>
+        <a href="#">KIDS</a>
+        <a href="#">FASHION</a>
+        <a href="#">DEPARTMENT STORES</a>
+        <a href="#">F&B</a>
+        <a href="#">TECH</a>
+        <a href="#">TRAVEL</a>
+        <a href="#">GIFT</a>
+        <a href="#">LAINNYA</a>
+    </div>
+</div>
+
+<div class="container-fluid footer-links">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-3 mb-4">
+                <h5>Perusahaan</h5>
+                <ul>
+                    <li><a href="#">Ikhtisar Perusahaan</a></li>
+                    <li><a href="#">Pencapaian Penting</a></li>
+                    <li><a href="#">Struktur Organisasi</a></li>
+                    <li><a href="#">Karir</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-3 mb-4">
+                <h5>Brand</h5>
+                <ul>
+                    <li><a href="#">Active</a></li>
+                    <li><a href="#">Kids</a></li>
+                    <li><a href="#">Fashion</a></li>
+                    <li><a href="#">Department Stores</a></li>
+                    <li><a href="#">F&B</a></li>
+                    <li><a href="#">Tech</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Gift</a></li>
+                    <li><a href="#">Others</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-6 col-md-3 mb-4">
+                <h5>Investor</h5>
+                <ul>
+                    <li><a href="#">Laporan Keuangan</a></li>
+                    <li><a href="#">Laporan Tahunan & Keberlanjutan</a></li>
+                    <li><a href="#">Pengungkapan</a></li>
+                    <li><a href="#">Ikhtisar Keuangan</a></li>
+                    <li><a href="#">Saham</a></li>
+                    <li><a href="#">Kepemilikan Saham</a></li>
+                    <li><a href="#">Prospektus Pencatatan Perdana</a></li>
+                    <li><a href="#">Anggaran Dasar</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-3 mb-4 text-end">
+                <img src="map-logo.png" alt="MAP Logo Mitra Adiperkasa" style="height: 40px;"> 
+                <p style="font-size: 0.8rem; color: var(--text-dark);">Mitra Adiperkasa</p>
+                
+                <ul class="list-unstyled text-start float-end">
+                    <li><a href="#">Komite Audit</a></li>
+                    <li><a href="#">Risiko & Penanganannya</a></li>
+                    <li><a href="#">Kode Etik</a></li>
+                    <li><a href="#">Whistleblowing System</a></li>
+                    <li><a href="#">Komite Nominasi dan Remunerasi</a></li>
+                    <li><a href="#">Pedoman dan Aturan Kerja</a></li>
+                    <li><a href="#">Unit Audit Internal</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-12"><hr style="border-color: #dddddd;"></div>
+
+            <div class="col-md-3 mb-4">
+                <h5>Tautan</h5>
+                <ul>
+                    <li><a href="#">MAP Club</a></li>
+                    <li><a href="#">MAP Gift Voucher</a></li>
+                    <li><a href="#">MAP Corporate Gift</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Berita</h5>
+                <ul>
+                    <li><a href="#">Corporate</a></li>
+                    <li><a href="#">Siaran Pers</a></li>
+                    <li><a href="#">Highlight</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h5>Kontak</h5>
+                <ul>
+                    <li><a href="#">Hubungi Kami</a></li>
+                    <li><a href="#">Lokasi Kantor</a></li>
+                    <li><a href="#">Lokasi Gerai</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4 text-end">
+                <p style="font-size: 0.8rem; color: var(--text-dark); margin-bottom: 0;">Terhubung dengan kami:</p>
+                <div class="social-links mt-2">
+                    <a href="#" title="Instagram" style="color: var(--map-red);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="YouTube" style="color: var(--map-red);"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="Facebook" style="color: var(--map-red);"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid footer-bottom">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <h5 class="mapclub-text">Lihat Berita Terbaru tentang MAPCLUB</h5>
+                <a href="#" class="mapclub-cta text-decoration-none">MASUK KE MAPCLUB</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid copyright-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                © 2025 PT MITRA ADIPERKASA TBK. ALL RIGHTS RESERVED
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="#">KEBIJAKAN PRIVASI</a> | <a href="#">KETENTUAN HAK CIPTA</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
